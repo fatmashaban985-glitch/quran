@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b2230">
+  <meta name="description" content="أوثق شافع: أكاديمية إلكترونية لتعليم القرآن الكريم والتجويد والحفظ على يد معلمين ومعلمات مجازين.">
+  <title>أوثق شافع | رحلتك المتقنة لتعلّم القرآن</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #123345;
+      --green-dark: #091f2c;
+      --green-soft: #e9f0f1;
+      --gold: #a87334;
+      --gold-light: #d9b576;
+      --ink: #192b34;
+      --muted: #707c80;
+      --paper: #f8f6f0;
+      --white: #fff;
+      --line: #e9eee9;
+      --shadow: 0 24px 70px rgba(13, 43, 31, .10);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Cairo", sans-serif;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+    body.modal-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { cursor: pointer; }
+    .container { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
+    .section { padding: 104px 0; }
+    .section-heading { max-width: 650px; margin: 0 auto 50px; text-align: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      color: var(--gold); font-size: .79rem; font-weight: 800; letter-spacing: .04em;
+    }
+    .eyebrow::before { content: ""; width: 23px; height: 1px; background: currentColor; }
+    h1, h2, h3, p { margin-top: 0; }
+    .section-heading h2 { margin: 12px 0 12px; color: var(--green); font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.4; }
+    .section-heading p { color: var(--muted); margin: 0; }
+    .btn {
+      display: inline-flex; min-height: 52px; align-items: center; justify-content: center; gap: 10px;
+      border: 1px solid transparent; border-radius: 14px; padding: 0 23px;
+      font-size: .9rem; font-weight: 800; transition: transform .25s, box-shadow .25s, background .25s, border-color .25s;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { background: var(--gold); color: white; box-shadow: 0 10px 24px #d9770635; }
+    .btn-primary:hover { background: #c46b05; box-shadow: 0 14px 30px #d9770645; }
+    .btn-outline { color: var(--green); border-color: #d9e3dc; background: rgba(255,255,255,.62); }
+    .btn-outline:hover { background: white; border-color: #b8cdbf; }
+    .icon { width: 20px; height: 20px; flex: 0 0 auto; }
+
+    /* Navigation */
+    .site-header { position: sticky; z-index: 20; top: 0; background: #f9faf7eF; border-bottom: 1px solid #e7ece8; backdrop-filter: blur(16px); }
+    .nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--green); font-size: 1.18rem; font-weight: 800; white-space: nowrap; }
+    .brand-mark {
+      width: 43px; height: 43px; display: grid; place-items: center; border-radius: 15px;
+      overflow: hidden; border: 1px solid #d9b57670; object-fit: cover; object-position: center 38%;
+      background: var(--green); box-shadow: 0 7px 18px #12334525;
+    }
+    .brand-mark svg { width: 26px; height: 26px; }
+    .nav-links { display: flex; align-items: center; gap: clamp(16px, 2.3vw, 32px); margin: 0; padding: 0; list-style: none; }
+    .nav-links a { color: #536159; font-size: .84rem; font-weight: 700; transition: color .2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { min-height: 44px; padding-inline: 17px; font-size: .8rem; }
+    .menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 13px; background: white; color: var(--green); }
+
+    /* Hero */
+    .hero {
+      position: relative; min-height: 650px; overflow: hidden; display: flex; align-items: center;
+      background: radial-gradient(ellipse at 13% 25%, #d9b57627, transparent 28%), radial-gradient(ellipse at 78% 15%, #163c4c10, transparent 32%), var(--paper);
+    }
+    #light-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: 50px; padding-block: 72px; }
+    .hero-copy { max-width: 600px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px; border: 1px solid #e7e8d9; border-radius: 100px; color: #64734f; background: #fff9; font-size: .75rem; font-weight: 700; }
+    .hero-badge span { width: 7px; height: 7px; border-radius: 50%; background: #79a979; box-shadow: 0 0 0 4px #79a97920; }
+    .hero h1 { margin: 22px 0 16px; color: var(--green); font-size: clamp(2.5rem, 5vw, 4.25rem); font-weight: 800; line-height: 1.3; letter-spacing: -.055em; }
+    .hero h1 em { color: var(--gold); font-family: "Amiri", serif; font-style: normal; font-weight: 700; letter-spacing: 2px; }
+    .hero-copy > p { max-width: 520px; margin-bottom: 25px; color: #69756e; font-size: 1.02rem; line-height: 2; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .trust-row { display: flex; flex-wrap: wrap; align-items: center; gap: 13px; margin-top: 28px; color: #66746b; font-size: .77rem; font-weight: 700; }
+    .avatar-stack { display: flex; direction: ltr; padding-left: 5px; }
+    .avatar-stack span { width: 31px; height: 31px; display: grid; place-items: center; margin-left: -6px; border: 2px solid var(--paper); border-radius: 50%; background: #e9d8bd; font-size: .82rem; }
+    .avatar-stack span:nth-child(2) { background: #d4e4d7; }
+    .avatar-stack span:nth-child(3) { background: #ecd3c4; }
+    .trust-stars { color: var(--gold); letter-spacing: 2px; }
+    .hero-art { position: relative; min-height: 470px; display: grid; place-items: center; }
+    .arch-glow { position: absolute; width: 410px; height: 410px; border-radius: 50%; background: #e0b54713; filter: blur(14px); }
+    .arch {
+      position: relative; width: min(370px, 82vw); height: 420px; overflow: hidden;
+      border: 1px solid #ffffffa8; border-radius: 190px 190px 34px 34px;
+      background: linear-gradient(155deg, #1d4b5c 0%, #103344 53%, #091f2c 100%);
+      box-shadow: 0 32px 80px #0b223033, inset 0 0 0 9px #ffffff0b;
+    }
+    .arch-logo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .arch::before, .arch::after { position: absolute; content: ""; pointer-events: none; }
+    .arch::before { inset: 19px; border: 1px solid #e8c86b45; border-radius: 180px 180px 23px 23px; }
+    .arch::after { inset: 0; opacity: .23; background-image: repeating-linear-gradient(45deg, transparent 0 20px, #e1bc6420 20px 21px), repeating-linear-gradient(-45deg, transparent 0 20px, #e1bc6415 20px 21px); mask-image: linear-gradient(to bottom, black, transparent 78%); }
+    .arch-inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; padding-top: 22px; color: #fff5d5; text-align: center; }
+    .arch-ornament { width: 75px; height: 75px; display: grid; place-items: center; margin-bottom: 18px; border: 1px solid #e8c86b80; border-radius: 50%; color: var(--gold-light); background: #ffffff09; }
+    .arch-ornament svg { width: 42px; height: 42px; }
+    .arch-verse { margin: 0; font-family: "Amiri", serif; font-size: 2.55rem; line-height: 1.6; }
+    .arch-caption { margin: 10px 0 0; color: #f1e6c6bd; font-size: .76rem; letter-spacing: .09em; }
+    .floating-note { position: absolute; display: flex; align-items: center; gap: 10px; padding: 12px 16px; border: 1px solid #ffffffc4; border-radius: 16px; background: #ffffffeb; box-shadow: 0 12px 35px #193b291a; }
+    .floating-note.top { top: 51px; right: -15px; }
+    .floating-note.bottom { bottom: 36px; left: -26px; }
+    .note-icon { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 12px; color: var(--gold); background: #fdf2d9; }
+    .note-icon svg { width: 19px; height: 19px; }
+    .floating-note strong, .floating-note small { display: block; line-height: 1.5; }
+    .floating-note strong { color: var(--green); font-size: .78rem; }
+    .floating-note small { color: var(--muted); font-size: .68rem; }
+
+    /* Feature cards */
+    .features { background: white; }
+    .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 17px; }
+    .feature-card { position: relative; overflow: hidden; padding: 25px 22px; border: 1px solid #e9eee9; border-radius: 20px; background: linear-gradient(145deg, #fff, #fbfcf9); transition: transform .3s, box-shadow .3s, border-color .3s; }
+    .feature-card::after { position: absolute; content: ""; width: 100px; height: 100px; left: -36px; bottom: -44px; border-radius: 50%; background: #a873340a; transition: transform .35s; }
+    .feature-card:hover { transform: translateY(-7px); border-color: #e2d5b5; box-shadow: var(--shadow); }
+    .feature-card:hover::after { transform: scale(1.7); }
+    .feature-icon { width: 48px; height: 48px; display: grid; place-items: center; margin-bottom: 18px; border: 1px solid #e7eee8; border-radius: 15px; color: var(--green); background: var(--green-soft); }
+    .feature-icon svg { width: 23px; height: 23px; }
+    .feature-card:nth-child(even) .feature-icon { color: var(--gold); background: #f7f0e2; border-color: #eee2c9; }
+    .feature-card h3 { margin-bottom: 8px; color: var(--green); font-size: 1rem; }
+    .feature-card p { margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.9; }
+
+    /* Courses */
+    .courses { background: linear-gradient(180deg, #f1f3f0, #f8f6f0); }
+    .course-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .course-card { overflow: hidden; border: 1px solid #e5e3db; border-radius: 22px; background: white; transition: transform .3s, box-shadow .3s, border-color .3s; }
+    .course-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .course-card:hover { border-color: #cfb98e; }
+    .course-card > a { display: block; height: 100%; color: inherit; text-decoration: none; }
+    .course-card:focus-within { transform: translateY(-6px); border-color: #a87334; box-shadow: var(--shadow); }
+    .course-card > a:focus-visible { outline: 3px solid #a87334; outline-offset: -4px; border-radius: 21px; }
+    .course-art { position: relative; min-height: 112px; display: grid; place-items: center; overflow: hidden; background: linear-gradient(135deg, #123345, #1d4b5c); }
+    .course-art::before, .course-art::after { position: absolute; content: ""; border: 1px solid #d9b57660; transform: rotate(45deg); }
+    .course-art::before { width: 84px; height: 84px; border-radius: 21px; }
+    .course-art::after { width: 61px; height: 61px; border-radius: 16px; }
+    .course-art svg { position: relative; z-index: 1; width: 39px; height: 39px; color: var(--gold-light); }
+    .course-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .45s; }
+    .course-card:hover .course-art img { transform: scale(1.05); }
+    .course-card:nth-child(2) .course-art { background: linear-gradient(135deg, #73502d, #a87334); }
+    .course-card:nth-child(3) .course-art { background: linear-gradient(135deg, #0d2938, #426476); }
+    .course-card:nth-child(4) .course-art { background: linear-gradient(135deg, #6b5433, #a58a5b); }
+    .course-card:nth-child(5) .course-art { background: linear-gradient(135deg, #123345, #317080); }
+    .course-card:nth-child(6) .course-art { background: linear-gradient(135deg, #463a33, #8b6948); }
+    .course-content { padding: 19px; }
+    .course-content h3 { margin: 0 0 7px; color: var(--green); font-size: 1rem; }
+    .course-content > p { min-height: 52px; margin-bottom: 13px; color: var(--muted); font-size: .76rem; line-height: 1.8; }
+    .course-topline { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .course-topline h3 { margin: 0 0 7px; color: var(--green); font-size: .98rem; }
+    .course-number { color: #a873345e; font-family: "Amiri", serif; font-size: 1.25rem; }
+    .course-tags { display: flex; flex-wrap: wrap; gap: 7px; margin: 0; padding: 0; list-style: none; }
+    .course-tags li { padding: 4px 9px; border: 1px solid #ece8de; border-radius: 30px; color: #59696d; background: #fbfaf6; font-size: .68rem; }
+    .course-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; color: var(--gold); font-size: .75rem; font-weight: 800; }
+    .course-link:hover { color: var(--green); }
+
+    /* Recitation */
+    .recitation { padding: 88px 0; background: var(--green-dark); color: white; }
+    .recitation-inner { display: grid; grid-template-columns: 1fr 1.1fr; align-items: center; gap: 60px; }
+    .recitation-copy .eyebrow { color: var(--gold-light); }
+    .recitation-copy h2 { margin: 11px 0 12px; font-size: clamp(1.9rem, 3.5vw, 2.65rem); line-height: 1.5; }
+    .recitation-copy p { margin-bottom: 0; color: #d1ded7; font-size: .9rem; line-height: 2; }
+    .recitation-audio { display: none; }
+
+    /* Student stories and contact */
+    .testimonials { background: #e0dbdba8; }
+    .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .testimonial-card { position: relative; padding: 25px; border: 1px solid #e8e5dc; border-radius: 20px; background: linear-gradient(145deg, #fff, #fbf9f3); }
+    .testimonial-stars { margin-bottom: 12px; color: var(--gold); letter-spacing: 3px; }
+    .testimonial-card blockquote { margin: 0 0 19px; color: #536168; font-family: "Amiri", serif; font-size: 1.17rem; line-height: 1.9; }
+    .testimonial-person { display: flex; align-items: center; gap: 11px; }
+    .testimonial-avatar { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 14px; color: var(--green); background: #e9f0f1; font-weight: 800; }
+    .testimonial-person strong, .testimonial-person small { display: block; line-height: 1.55; }
+    .testimonial-person strong { color: var(--green); font-size: .79rem; }
+    .testimonial-person small { color: var(--muted); font-size: .68rem; }
+    .testimonial-note { margin: 22px 0 0; color: #7a807d; text-align: center; font-size: .72rem; }
+    .contact-section { background: linear-gradient(145deg, #f3f1e9, #edf2f1); }
+    .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; align-items: stretch; gap: 22px; }
+    .contact-card { padding: 30px; border-radius: 22px; color: white; background: linear-gradient(155deg, #102f40, #091f2c); }
+    .contact-card h3 { margin: 0 0 8px; font-size: 1.28rem; }
+    .contact-card > p { margin: 0 0 25px; color: #c5d2d3; font-size: .81rem; }
+    .contact-detail { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+    .contact-detail-icon { width: 41px; height: 41px; display: grid; place-items: center; border: 1px solid #d9b57652; border-radius: 13px; color: var(--gold-light); background: #ffffff0c; }
+    .contact-detail-icon svg { width: 20px; height: 20px; }
+    .contact-detail strong, .contact-detail small { display: block; line-height: 1.6; }
+    .contact-detail strong { font-size: .8rem; }
+    .contact-detail small { color: #b6c7c9; font-size: .68rem; }
+    .contact-form { display: grid; gap: 13px; padding: 28px; border: 1px solid #e4e3dc; border-radius: 22px; background: #fff; box-shadow: 0 15px 40px #1733420b; }
+    .contact-form h3 { margin: 0 0 2px; color: var(--green); font-size: 1.15rem; }
+    .contact-form label { display: block; margin-bottom: 5px; color: #39483f; font-size: .75rem; font-weight: 700; }
+    .contact-form input, .contact-form textarea { width: 100%; min-height: 45px; padding: 9px 12px; border: 1px solid #e2e5df; border-radius: 11px; outline: none; color: var(--ink); background: #fbfcfa; font: inherit; font-size: .8rem; }
+    .contact-form textarea { min-height: 94px; resize: vertical; }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: #b69a67; box-shadow: 0 0 0 3px #a8733412; }
+    .contact-form .btn { justify-self: start; }
+    .contact-status { margin: 0; color: var(--green); font-size: .76rem; }
+    .contact-status a, .form-message a { color: var(--gold); font-weight: 800; text-decoration: underline; }
+
+    /* Booking prompt and footer */
+    .booking-band { padding: 65px 0; background: #f1f3f0; }
+    .booking-card { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 35px 42px; border-radius: 26px; color: white; background: linear-gradient(120deg, #091f2c, #174353); }
+    .booking-card::after { position: absolute; content: ""; width: 250px; height: 250px; left: 28%; top: -165px; border: 1px solid #ffffff1c; border-radius: 50%; box-shadow: 0 0 0 24px #ffffff08, 0 0 0 48px #ffffff06; }
+    .booking-card h2 { position: relative; z-index: 1; margin: 0 0 5px; font-size: clamp(1.4rem, 3vw, 2rem); }
+    .booking-card p { position: relative; z-index: 1; margin: 0; color: #d0e0d7; font-size: .85rem; }
+    .booking-card .btn { position: relative; z-index: 1; white-space: nowrap; }
+    .footer { padding: 60px 0 20px; color: #c1d1c9; background: #071923; }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 45px; padding-bottom: 40px; }
+    .footer .brand { color: white; }
+    .footer-about p { max-width: 300px; margin: 17px 0 0; color: #aec0b6; font-size: .78rem; line-height: 2; }
+    .footer h3 { margin: 3px 0 14px; color: white; font-size: .88rem; }
+    .footer-links { display: grid; gap: 9px; padding: 0; margin: 0; list-style: none; }
+    .footer-links a { color: #b7c8bf; font-size: .77rem; transition: color .2s; }
+    .footer-links a:hover { color: var(--gold-light); }
+    .socials { display: flex; gap: 9px; margin-top: 18px; }
+    .socials a { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #ffffff26; border-radius: 11px; color: #d8e2dc; font-size: .69rem; font-weight: 800; transition: background .2s, color .2s; }
+    .socials a:hover { color: var(--green-dark); background: var(--gold-light); }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 16px; padding-top: 17px; border-top: 1px solid #ffffff1c; color: #9fb3a8; font-size: .7rem; }
+    .footer-bottom a:hover { color: white; }
+
+    /* Accessible booking dialog */
+    .modal-backdrop { position: fixed; z-index: 50; inset: 0; display: grid; place-items: center; overflow-y: auto; padding: 22px; background: #061b13a8; backdrop-filter: blur(7px); opacity: 0; visibility: hidden; transition: opacity .25s, visibility .25s; }
+    .modal-backdrop.is-open { opacity: 1; visibility: visible; }
+    .modal { position: relative; width: min(100%, 500px); max-height: calc(100vh - 44px); overflow-y: auto; padding: 32px; border: 1px solid #ffffffb0; border-radius: 25px; background: #fff; box-shadow: 0 30px 90px #001a1050; transform: translateY(12px) scale(.98); transition: transform .25s; }
+    .is-open .modal { transform: translateY(0) scale(1); }
+    .modal-close { position: absolute; top: 17px; left: 17px; width: 37px; height: 37px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 12px; color: #5e6c63; background: white; font-size: 1.25rem; }
+    .modal h2 { margin: 0 0 5px; color: var(--green); font-size: 1.55rem; }
+    .modal-intro { margin-bottom: 23px; color: var(--muted); font-size: .8rem; }
+    .form-grid { display: grid; gap: 14px; }
+    .form-field label { display: block; margin-bottom: 5px; color: #39483f; font-size: .77rem; font-weight: 700; }
+    .form-field input, .form-field select { width: 100%; min-height: 47px; padding: 9px 13px; border: 1px solid #e2e8e2; border-radius: 12px; outline: none; color: var(--ink); background: #fbfcfa; transition: border-color .2s, box-shadow .2s; }
+    .form-field input:focus, .form-field select:focus { border-color: #7ca48a; box-shadow: 0 0 0 3px #064e3b12; }
+    .form-submit { width: 100%; margin-top: 5px; }
+    .form-message { display: none; margin: 0; padding: 11px 13px; border-radius: 11px; color: var(--green); background: var(--green-soft); font-size: .78rem; }
+    .form-message.is-visible { display: block; }
+
+    @media (max-width: 920px) {
+      .nav-links { gap: 14px; }
+      .nav-links a { font-size: .77rem; }
+      .nav-cta { padding-inline: 13px; }
+      .hero-grid { gap: 20px; }
+      .hero-art { transform: scale(.92); }
+      .feature-grid, .course-grid, .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1.2fr 1fr 1fr; }
+      .footer-about { grid-column: 1 / -1; }
+    }
+    @media (max-width: 700px) {
+      .container { width: min(calc(100% - 36px), 520px); }
+      .section { padding: 76px 0; }
+      .nav { min-height: 70px; gap: 10px; }
+      .menu-toggle { display: grid; place-items: center; }
+      .nav-cta { margin-right: auto; min-height: 40px; font-size: .72rem; }
+      .nav-links { position: absolute; top: calc(100% + 1px); right: 0; left: 0; display: none; align-items: stretch; gap: 0; padding: 8px 18px 16px; border-bottom: 1px solid var(--line); background: #f9faf7; box-shadow: 0 14px 22px #1436260c; }
+      .nav-links.is-open { display: grid; }
+      .nav-links a { display: block; padding: 11px 5px; font-size: .86rem; }
+      .hero { min-height: auto; }
+      .hero-grid { grid-template-columns: 1fr; gap: 14px; padding-block: 57px 37px; }
+      .hero h1 { max-width: 540px; font-size: clamp(2.25rem, 10vw, 3.15rem); }
+      .hero-copy > p { font-size: .9rem; }
+      .hero-art { min-height: 400px; margin-top: 0; transform: none; }
+      .arch { width: 300px; height: 365px; }
+      .arch-verse { font-size: 2.2rem; }
+      .arch-glow { width: 320px; height: 320px; }
+      .floating-note.top { top: 33px; right: 0; }
+      .floating-note.bottom { bottom: 25px; left: -2px; }
+      .section-heading { margin-bottom: 35px; }
+      .feature-grid, .course-grid { gap: 12px; }
+      .testimonial-grid { gap: 12px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 14px; }
+      .feature-card { padding: 19px 16px; }
+      .feature-card h3 { font-size: .9rem; }
+      .feature-card p { font-size: .74rem; }
+      .course-content { padding: 16px; }
+      .course-content > p { min-height: 68px; }
+      .recitation { padding: 70px 0; }
+      .recitation-inner { grid-template-columns: minmax(0, 1fr); gap: 27px; }
+      .booking-card { align-items: flex-start; flex-direction: column; padding: 28px 25px; }
+      .booking-card .btn { min-height: 48px; }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 22px; }
+      .footer-about { grid-column: 1 / -1; }
+      .footer-bottom { flex-direction: column; gap: 7px; }
+    }
+    @media (max-width: 390px) {
+      .container { width: calc(100% - 28px); }
+      .brand { gap: 7px; font-size: 1rem; }
+      .brand-mark { width: 39px; height: 39px; }
+      .nav-cta { padding-inline: 10px; font-size: .67rem; }
+      .feature-grid, .course-grid, .testimonial-grid { grid-template-columns: 1fr; }
+      .course-content > p { min-height: 0; }
+      .course-art { min-height: 115px; }
+      .modal { padding: 27px 21px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="التنقل الرئيسي">
+      <a class="brand" href="#home" aria-label="أوثق شافع - الصفحة الرئيسية">
+        <img class="brand-mark" src="assets/awthaq-shafea-logo.jpg" alt="">
+        <span>أوثق شافع</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="فتح القائمة" aria-expanded="false" aria-controls="nav-links">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">عن الأكاديمية</a></li>
+        <li><a href="#courses">المسارات</a></li>
+        <li><a href="#teachers">معلّمونا</a></li>
+        <li><a href="#pricing">الأسعار</a></li>
+        <li><a href="#contact">تواصل معنا</a></li>
+      </ul>
+      <button class="btn btn-primary nav-cta open-booking" type="button">احجز حصتك التجريبية</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <canvas id="light-canvas" aria-hidden="true"></canvas>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="hero-badge"><span></span> أكاديمية أوثق شافع لتحفيظ القرآن الكريم</span>
+          <h1>رحلتك إلى كتاب الله<br><em>حفظًا وتدبّرًا وإتقانًا</em></h1>
+          <p>مسارات قرآنية تناسب هدفك ومستواك؛ من تثبيت الحفظ والتلاوة إلى القراءات والروايات، بصحبة معلّمين ومعلّمات مجازين.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary open-booking" type="button">
+              ابدأ رحلتك الآن
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </button>
+            <a class="btn btn-outline" href="#courses">اكتشف المسارات</a>
+          </div>
+          <div class="trust-row">
+            <div class="avatar-stack" aria-hidden="true"><span>👩🏻‍🏫</span><span>👨🏻‍🏫</span><span>👩🏽‍🏫</span></div>
+            <span>معلمون مجازون ومعتمدون</span>
+            <span class="trust-stars" aria-label="تقييم خمس نجوم">★★★★★</span>
+            <span>+١٢٠٠ طالب</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="تصميم زخرفي مستوحى من محراب قرآني">
+          <div class="arch-glow"></div>
+          <div class="arch">
+            <img class="arch-logo" src="assets/awthaq-shafea-logo.jpg" alt="شعار أكاديمية أوثق شافع">
+          </div>
+          <div class="floating-note top">
+            <span class="note-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 14.8 9.2 21.5 10 16.5 14.5 17.8 21 12 17.7 6.2 21l1.3-6.5-5-4.5 6.7-.8L12 3Z"/></svg></span>
+            <span><strong>رحلة بإتقان</strong><small>خطوة صغيرة كل يوم</small></span>
+          </div>
+          <div class="floating-note bottom">
+            <span class="note-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8v4l2.5 2.5"/><circle cx="12" cy="12" r="9"/></svg></span>
+            <span><strong>مواعيد تناسبك</strong><small>تعلّم من أي مكان</small></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section features" id="about">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">لماذا أوثق شافع؟</span>
+          <h2>تعليمٌ يلامس القلب<br>ويصنع فرقًا</h2>
+          <p>بيئة تعليمية دافئة تجمع بين أصالة التلقّي وسهولة التعلّم عن بُعد.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4.5 6v5c0 5 3.2 8.4 7.5 10 4.3-1.6 7.5-5 7.5-10V6L12 3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+            <h3>معلّمون مجازون</h3><p>نخبة من أهل القرآن ذوي الإجازات والخبرة في تعليم مختلف الأعمار.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+            <h3>أوقات مرنة</h3><p>اختر المواعيد التي تناسب يومك، مع إمكانية تعديل جدولك بكل سهولة.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4Z"/><path d="M8 4v13a3 3 0 0 0 3 3M9 8h6M9 11h6"/></svg></div>
+            <h3>مصحف تفاعلي</h3><p>تابع الآيات واستمع وصحّح تلاوتك في تجربة رقمية حيّة ومتكاملة.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5m0 14h17"/><path d="m7 15 4-4 3 2 5-6"/><path d="M16 7h3v3"/></svg></div>
+            <h3>متابعة تقدّمك</h3><p>أهداف واضحة وتقارير دورية تساعدك على رؤية إنجازاتك خطوة بخطوة.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section courses" id="courses">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">مسارات الأكاديمية المتميزة</span>
+          <h2>لكلّ رحلة قرآنية مسار</h2>
+          <p>اختر المسار الأقرب إلى هدفك، وتواصل معنا لنرتّب معك خطة التعلّم المناسبة.</p>
+        </div>
+        <div class="course-grid">
+          <article class="course-card">
+            <a href="paths/khatimat.html" aria-label="اكتشف تفاصيل مسار الخاتمات والتثبيت">
+            <div class="course-art"><img src="assets/pathway-khatimat.svg" alt="" loading="lazy"></div>
+            <div class="course-content">
+              <div class="course-topline"><h3>مسار الخاتمات والتثبيت</h3><span class="course-number">٠١</span></div>
+              <p>تثبيت متون الحفظ ومراجعته بخيارات تناسب مقدارك ووقتك.</p>
+              <ul class="course-tags"><li>التحفة والجزرية</li><li>ربع أو حزب</li><li>تثبيت جزء</li></ul>
+              <span class="course-link">اكتشف تفاصيل المسار <span aria-hidden="true">←</span></span>
+            </div>
+            </a>
+          </article>
+          <article class="course-card">
+            <a href="paths/iqra-warttil.html" aria-label="اكتشف تفاصيل مسار اقرأ ورتّل">
+            <div class="course-art"><img src="assets/pathway-iqra.svg" alt="" loading="lazy"></div>
+            <div class="course-content">
+              <div class="course-topline"><h3>مسار اقرأ ورتّل</h3><span class="course-number">٠٢</span></div>
+              <p>اختر ختمة تناسب جدولك، من برنامج مكثّف إلى ورد شهري.</p>
+              <ul class="course-tags"><li>٣ أيام</li><li>أسبوع</li><li>١٠ أو ١٥ يومًا</li><li>شهرية</li></ul>
+              <span class="course-link">اكتشف تفاصيل المسار <span aria-hidden="true">←</span></span>
+            </div>
+            </a>
+          </article>
+          <article class="course-card">
+            <a href="paths/thabbit-hifzak.html" aria-label="اكتشف تفاصيل مسار تثبيت حفظك">
+            <div class="course-art"><img src="assets/pathway-hifz.svg" alt="" loading="lazy"></div>
+            <div class="course-content">
+              <div class="course-topline"><h3>مسار تثبيت حفظك</h3><span class="course-number">٠٣</span></div>
+              <p>مراجعة منظّمة لمواضع الحفظ، من أوائل السور إلى أواخرها.</p>
+              <ul class="course-tags"><li>البقرة إلى التوبة</li><li>يونس إلى القصص</li><li>العنكبوت إلى الناس</li></ul>
+              <span class="course-link">اكتشف تفاصيل المسار <span aria-hidden="true">←</span></span>
+            </div>
+            </a>
+          </article>
+          <article class="course-card">
+            <a href="paths/qiraat-riwayat.html" aria-label="اكتشف تفاصيل مسار القراءات والروايات">
+            <div class="course-art"><img src="assets/pathway-qiraat.svg" alt="" loading="lazy"></div>
+            <div class="course-content">
+              <div class="course-topline"><h3>مسار القراءات والروايات</h3><span class="course-number">٠٤</span></div>
+              <p>تعلّم القراءات والروايات على أيدي أهل الاختصاص.</p>
+              <ul class="course-tags"><li>قراءة عاصم</li><li>رواية ورش</li><li>قصر المنفصل</li></ul>
+              <span class="course-link">اكتشف تفاصيل المسار <span aria-hidden="true">←</span></span>
+            </div>
+            </a>
+          </article>
+          <article class="course-card">
+            <a href="paths/manahij-azhar.html" aria-label="اكتشف تفاصيل مسار المناهج والأزهر">
+            <div class="course-art"><img src="assets/pathway-azhar.svg" alt="" loading="lazy"></div>
+            <div class="course-content">
+              <div class="course-topline"><h3>مسار المناهج والأزهر</h3><span class="course-number">٠٥</span></div>
+              <p>دعم قرآني مواكب لمقرراتك ومناهجك الدراسية الأزهرية.</p>
+              <ul class="course-tags"><li>حفظ المنهج الأزهري</li><li>متابعة دراسية</li></ul>
+              <span class="course-link">اكتشف تفاصيل المسار <span aria-hidden="true">←</span></span>
+            </div>
+            </a>
+          </article>
+          <article class="course-card">
+            <a href="paths/family-community.html" aria-label="اكتشف تفاصيل المسار العائلي والمجتمعي">
+            <div class="course-art"><img src="assets/pathway-family.svg" alt="" loading="lazy"></div>
+            <div class="course-content">
+              <div class="course-topline"><h3>المسار العائلي والمجتمعي</h3><span class="course-number">٠٦</span></div>
+              <p>تعلّموا معًا في بيئة مشجّعة تراعي احتياج كل فرد.</p>
+              <ul class="course-tags"><li>مع الابن أو الابنة</li><li>مع الأخ أو الأخت</li><li>دعم القراءة</li></ul>
+              <span class="course-link">اكتشف تفاصيل المسار <span aria-hidden="true">←</span></span>
+            </div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="recitation" id="teachers">
+      <div class="container recitation-inner">
+        <div class="recitation-copy">
+        </div>
+        <audio class="recitation-audio" id="recitation-audio" autoplay preload="auto">
+            <source src="assets/shatibi-audio.mp4" type="video/mp4">
+      </div>
+    </section>
+
+    <section class="section testimonials" id="testimonials">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">أثر الرحلة</span>
+          <h2>كلمات من أهل القرآن</h2>
+          <p>نماذج إلهامية لشهادات الطلاب، تُستبدل بآراء طلاب الأكاديمية الفعلية عند النشر.</p>
+        </div>
+        <div class="testimonial-grid">
+          <article class="testimonial-card">
+            <div class="testimonial-stars" aria-label="خمس نجوم">★★★★★</div>
+            <blockquote>«ساعدتني خطة التثبيت على تنظيم مراجعتي، وأصبحت أقرأ بثقة وطمأنينة أكبر.»</blockquote>
+            <div class="testimonial-person"><span class="testimonial-avatar" aria-hidden="true">م</span><span><strong>طالبة في مسار التثبيت</strong><small>نموذج تجريبي</small></span></div>
+          </article>
+          <article class="testimonial-card">
+            <div class="testimonial-stars" aria-label="خمس نجوم">★★★★★</div>
+            <blockquote>«مرونة المواعيد والمتابعة المشجعة جعلتا تعلّم القرآن جزءًا جميلًا من يومي.»</blockquote>
+            <div class="testimonial-person"><span class="testimonial-avatar" aria-hidden="true">ع</span><span><strong>طالب في مسار اقرأ ورتّل</strong><small>نموذج تجريبي</small></span></div>
+          </article>
+          <article class="testimonial-card">
+            <div class="testimonial-stars" aria-label="خمس نجوم">★★★★★</div>
+            <blockquote>«وجدنا مسارًا عائليًا يناسبنا جميعًا، وخطوات واضحة تساعد أبناءنا على الاستمرار.»</blockquote>
+            <div class="testimonial-person"><span class="testimonial-avatar" aria-hidden="true">أ</span><span><strong>وليّة أمر</strong><small>نموذج تجريبي</small></span></div>
+          </article>
+        </div>
+        <p class="testimonial-note">تنويه: هذه نصوص توضيحية وليست تقييمات فعلية.</p>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">نحن هنا لمساعدتك</span>
+          <h2>ابدأ بخطوة، ودعنا نرافقك</h2>
+          <p>أرسل استفسارك وسنساعدك في التعرّف على المسار الأنسب لك.</p>
+        </div>
+        <div class="contact-grid">
+          <aside class="contact-card">
+            <h3>تواصل مع الأكاديمية</h3>
+            <p>للتسجيل والاستفسار عن المسارات والمواعيد.</p>
+            <a class="contact-detail" href="https://wa.me/201124810786" target="_blank" rel="noopener noreferrer">
+              <span class="contact-detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-4.6A8.5 8.5 0 1 1 20.5 11.5Z"/><path d="M8.5 8.5c.6 2.5 2.5 4.4 5 5l1-1 2 1c-.2 1.2-1.1 2-2.2 2-3.4-.2-6.7-3.5-6.9-6.9 0-1.1.8-2 2-2.2l1 2-1 1.1Z"/></svg></span>
+              <span><strong>واتساب / هاتف</strong><small dir="ltr">01124810786</small></span>
+            </a>
+            <div class="contact-detail">
+              <span class="contact-detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+              <span><strong>اختر الوقت المناسب لك</strong><small>تواصل معنا لمعرفة المواعيد المتاحة</small></span>
+            </div>
+          </aside>
+          <form class="contact-form" id="contact-form">
+            <h3>أرسل استفسارك</h3>
+            <div><label for="contact-name">الاسم</label><input id="contact-name" name="name" autocomplete="name" required placeholder="اكتب اسمك"></div>
+            <div><label for="contact-phone">رقم الهاتف</label><input id="contact-phone" name="phone" type="tel" autocomplete="tel" required placeholder="رقم يمكن التواصل معك عليه"></div>
+            <div><label for="contact-message">كيف نساعدك؟</label><textarea id="contact-message" name="message" required placeholder="اكتب سؤالك أو المسار الذي تهتم به"></textarea></div>
+            <button class="btn btn-primary" type="submit">تابع إلى واتساب <span aria-hidden="true">←</span></button>
+            <p class="contact-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="booking-band" id="pricing">
+      <div class="container">
+        <div class="booking-card">
+          <div><h2>رحلتك مع القرآن تبدأ بخطوة</h2><p>تواصل معنا، واكتشف تفاصيل المسار الذي يناسب هدفك.</p></div>
+          <button class="btn btn-primary open-booking" type="button">استفسر عن التسجيل <span aria-hidden="true">←</span></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a class="brand" href="#home">
+            <img class="brand-mark" src="assets/awthaq-shafea-logo.jpg" alt="">
+            <span>أوثق شافع</span>
+          </a>
+          <p>نرافقك بمحبة وإتقان في رحلة تعلّم القرآن الكريم، أينما كنت وفي كل مرحلة من عمرك.</p>
+          <div class="socials" aria-label="روابط التواصل الاجتماعي"><a href="#contact" aria-label="إنستغرام">ig</a><a href="#contact" aria-label="يوتيوب">yt</a><a href="#contact" aria-label="واتساب">wa</a></div>
+        </div>
+        <div><h3>روابط سريعة</h3><ul class="footer-links"><li><a href="#about">عن الأكاديمية</a></li><li><a href="#courses">المسارات التعليمية</a></li><li><a href="#teachers">معلّمونا</a></li><li><a href="#pricing">الأسعار</a></li></ul></div>
+        <div><h3>مساراتنا</h3><ul class="footer-links"><li><a href="#courses">الخاتمات والتثبيت</a></li><li><a href="#courses">اقرأ ورتّل</a></li><li><a href="#courses">القراءات والروايات</a></li><li><a href="#courses">المسار العائلي</a></li></ul></div>
+        <div><h3>تواصل معنا</h3><ul class="footer-links"><li><a href="https://wa.me/201124810786" target="_blank" rel="noopener noreferrer" dir="ltr">01124810786</a></li><li><a href="#contact">للتسجيل والاستفسار</a></li><li><a href="#privacy">سياسة الخصوصية</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="current-year">٢٠٢٦</span> أوثق شافع. جميع الحقوق محفوظة.</span><a id="privacy" href="#privacy">سياسة الخصوصية</a></div>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="booking-modal" aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-intro">
+      <button class="modal-close" type="button" aria-label="إغلاق النافذة">×</button>
+      <span class="eyebrow">خطوتك الأولى</span>
+      <h2 id="modal-title">احجز حصتك التجريبية</h2>
+      <p class="modal-intro" id="modal-intro">املأ بياناتك وسنتواصل معك لتأكيد موعد يناسبك.</p>
+      <form class="form-grid" id="booking-form">
+        <div class="form-field"><label for="student-name">الاسم الكامل</label><input id="student-name" name="name" autocomplete="name" required placeholder="اكتب اسمك هنا"></div>
+        <div class="form-field"><label for="student-phone">رقم الهاتف / واتساب</label><input id="student-phone" name="phone" type="tel" autocomplete="tel" required placeholder="اكتب رقم الهاتف مع مفتاح الدولة"></div>
+        <div class="form-field"><label for="preferred-time">الوقت المفضّل</label><select id="preferred-time" name="time" required><option value="" disabled selected>اختر الوقت المناسب</option><option>صباحًا (٨ ص – ١٢ ظ)</option><option>بعد الظهر (١٢ ظ – ٤ م)</option><option>مساءً (٤ م – ٩ م)</option></select></div>
+        <div class="form-field"><label for="course-choice">المسار التعليمي</label><select id="course-choice" name="course" required><option value="" disabled selected>اختر المسار الذي يناسبك</option><option>مسار الخاتمات والتثبيت</option><option>مسار اقرأ ورتّل</option><option>مسار تثبيت حفظك</option><option>مسار القراءات والروايات</option><option>مسار المناهج والأزهر</option><option>المسار العائلي والمجتمعي</option><option>أرغب في استشارة لاختيار المسار</option></select></div>
+        <button class="btn btn-primary form-submit" type="submit">أرسل طلب الحجز</button>
+        <p class="form-message" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    (() => {
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const canvas = document.querySelector("#light-canvas");
+      const context = canvas.getContext("2d");
+      let particles = [];
+      let frameId;
+
+      function resizeCanvas() {
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = canvas.clientWidth * ratio;
+        canvas.height = canvas.clientHeight * ratio;
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+        particles = Array.from({ length: Math.min(42, Math.floor(canvas.clientWidth / 24)) }, () => ({
+          x: Math.random() * canvas.clientWidth,
+          y: Math.random() * canvas.clientHeight,
+          radius: Math.random() * 1.5 + .45,
+          phase: Math.random() * Math.PI * 2,
+          speed: Math.random() * .012 + .004
+        }));
+        if (frameId) cancelAnimationFrame(frameId);
+        drawParticles();
+      }
+
+      function drawParticles() {
+        context.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+        particles.forEach((particle) => {
+          particle.phase += particle.speed;
+          const opacity = .17 + (Math.sin(particle.phase) + 1) * .24;
+          context.beginPath();
+          context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+          context.fillStyle = `rgba(185, 139, 73, ${opacity})`;
+          context.shadowColor = "#d9b576";
+          context.shadowBlur = particle.radius * 5;
+          context.fill();
+        });
+        context.shadowBlur = 0;
+        if (!reducedMotion) frameId = requestAnimationFrame(drawParticles);
+      }
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas, { passive: true });
+
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navLinks = document.querySelector(".nav-links");
+      menuToggle.addEventListener("click", () => {
+        const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+        menuToggle.setAttribute("aria-expanded", String(!expanded));
+        menuToggle.setAttribute("aria-label", expanded ? "فتح القائمة" : "إغلاق القائمة");
+        navLinks.classList.toggle("is-open", !expanded);
+      });
+      navLinks.addEventListener("click", (event) => {
+        if (event.target.closest("a")) {
+          navLinks.classList.remove("is-open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.setAttribute("aria-label", "فتح القائمة");
+        }
+      });
+
+      const modalBackdrop = document.querySelector("#booking-modal");
+      const modal = modalBackdrop.querySelector(".modal");
+      const closeButton = modalBackdrop.querySelector(".modal-close");
+      let previousFocus;
+      function openModal() {
+        previousFocus = document.activeElement;
+        modalBackdrop.classList.add("is-open");
+        modalBackdrop.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+        modal.querySelector("input").focus();
+      }
+      function closeModal() {
+        modalBackdrop.classList.remove("is-open");
+        modalBackdrop.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+        if (previousFocus) previousFocus.focus();
+      }
+      document.querySelectorAll(".open-booking").forEach((button) => button.addEventListener("click", openModal));
+      closeButton.addEventListener("click", closeModal);
+      modalBackdrop.addEventListener("click", (event) => {
+        if (event.target === modalBackdrop) closeModal();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && modalBackdrop.classList.contains("is-open")) closeModal();
+        if (event.key === "Tab" && modalBackdrop.classList.contains("is-open")) {
+          const focusable = [...modal.querySelectorAll("button, input, select")].filter((element) => !element.disabled);
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        }
+      });
+
+      function showWhatsAppLink(messageElement, message) {
+        const url = `https://wa.me/201124810786?text=${encodeURIComponent(message)}`;
+        const link = document.createElement("a");
+        link.href = url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "افتح واتساب";
+        messageElement.replaceChildren(document.createTextNode("إذا لم يفتح واتساب تلقائيًا، "));
+        messageElement.append(link);
+        messageElement.classList.add("is-visible");
+        window.open(url, "_blank", "noopener,noreferrer");
+      }
+
+      document.querySelector("#booking-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const data = new FormData(form);
+        const message = [
+          "السلام عليكم، أرغب في التسجيل بأكاديمية أوثق شافع.",
+          `الاسم: ${data.get("name")}`,
+          `رقم الهاتف: ${data.get("phone")}`,
+          `الوقت المفضّل: ${data.get("time")}`,
+          `المسار: ${data.get("course")}`
+        ].join("\n");
+        showWhatsAppLink(form.querySelector(".form-message"), message);
+      });
+
+      document.querySelector("#contact-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        const message = [
+          "السلام عليكم، لدي استفسار عن أكاديمية أوثق شافع.",
+          `الاسم: ${data.get("name")}`,
+          `رقم الهاتف: ${data.get("phone")}`,
+          `الاستفسار: ${data.get("message")}`
+        ].join("\n");
+        showWhatsAppLink(event.currentTarget.querySelector(".contact-status"), message);
+      });
+
+      document.querySelectorAll(".open-course").forEach((link) => {
+        link.addEventListener("click", () => {
+          document.querySelector("#contact-message").value = `أرغب في الاستفسار عن ${link.dataset.course}.`;
+        });
+      });
+      document.querySelector("#current-year").textContent = new Intl.NumberFormat("ar-EG").format(new Date().getFullYear());
+
+      const recitationAudio = document.querySelector("#recitation-audio");
+      recitationAudio.play().catch(() => {});
+
+    })();
+  </script>
+</body>
+</html>
