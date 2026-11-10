@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 360" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="34" y1="14" x2="470" y2="343" gradientUnits="userSpaceOnUse"><stop stop-color="#235565"/><stop offset="1" stop-color="#0A2631"/></linearGradient>
+    <linearGradient id="book" x1="167" y1="143" x2="350" y2="281" gradientUnits="userSpaceOnUse"><stop stop-color="#EAD7AB"/><stop offset="1" stop-color="#C29750"/></linearGradient>
+    <pattern id="ornament" width="38" height="38" patternUnits="userSpaceOnUse"><path d="M19 1 37 19 19 37 1 19 19 1Z" stroke="#D9B576" stroke-opacity=".13"/></pattern>
+    <filter id="shadow" x="117" y="201" width="286" height="121" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="13"/></filter>
+  </defs>
+  <rect width="520" height="360" rx="34" fill="url(#bg)"/><path d="M0 0h520v360H0z" fill="url(#ornament)"/>
+  <ellipse cx="262" cy="273" rx="119" ry="27" fill="#03151D" fill-opacity=".6" filter="url(#shadow)"/>
+  <circle cx="416" cy="89" r="55" fill="#D9B576" fill-opacity=".12" stroke="#D9B576" stroke-opacity=".5" stroke-width="2"/>
+  <circle cx="416" cy="89" r="37" stroke="#F0D89F" stroke-opacity=".62"/>
+  <path d="M416 61v56m-19-28h38m-32-13 26 26m0-26-26 26" stroke="#F0D89F" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M145 179c32-21 70-22 115-1 45-21 83-20 115 1v81c-44-22-82-23-115-2-33-21-71-20-115 2v-81Z" fill="url(#book)" stroke="#F0D89F" stroke-width="3"/>
+  <path d="M260 177v83m-95-56c26-12 52-13 78-3m-78 24c26-12 52-13 78-3m94-18c-26-12-52-13-78-3m78 24c-26-12-52-13-78-3" stroke="#74582F" stroke-opacity=".67" stroke-width="3" stroke-linecap="round"/>
+  <path d="M133 259c40-21 83-21 127 4 44-25 87-25 127-4l-28 21c-34-14-67-12-99 8-32-20-65-22-99-8l-28-21Z" fill="#9E7439" stroke="#E7CC8A" stroke-width="3"/>
+  <path d="M84 159c15-19 30-19 45 0m-53-19c23-29 46-29 69 0m-77-20c32-40 64-40 96 0" stroke="#F2D99E" stroke-opacity=".78" stroke-width="4" stroke-linecap="round"/>
+  <path d="M365 197c16-18 32-18 48 0m-53-20c24-27 49-27 73 0m-81-21c33-37 66-37 99 0" stroke="#F2D99E" stroke-opacity=".68" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="93" cy="78" r="5" fill="#ECD49A"/><circle cx="116" cy="58" r="3" fill="#ECD49A"/><circle cx="348" cy="71" r="4" fill="#ECD49A"/>
+</svg>
